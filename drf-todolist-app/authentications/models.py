@@ -2,6 +2,7 @@ from django.db import models
 from helpers.models import TrackingModel
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.models import (PermissionsMixin, BaseUserManager, AbstractBaseUser)
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your models here.
 
@@ -51,31 +52,12 @@ class User(AbstractBaseUser,PermissionsMixin):
         return self.email
 
     def tokens(self):
-        return ''
+        refresh=RefreshToken.for_user(self)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token)
+        }
     
-    # is_staff = models.BooleanField(
-    #     _('staff status'),
-    #     default=False,
-    #     help_text=_(
-    #         'Designates whether the user can log into this admin site.'),
-    # )
-    # is_active = models.BooleanField(
-    #     _('active'),
-    #     default=True,
-    #     help_text=_(
-    #         'Designates whether this user should be treated as active. '
-    #         'Unselect this instead of deleting accounts.'
-    #     ),
-    # )
-    # date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    # email_verified = models.BooleanField(
-    #     _('email_verified'),
-    #     default=False,
-    #     help_text=_(
-    #         'Designates whether this users email is verified. '
-
-    #     ),
-    # )
     
 
     
