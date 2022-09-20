@@ -3,7 +3,7 @@ from rest_framework import generics, status, views
 from .serializers import RegisterSerializer, EmailVerificationSerializer, LoginSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
-from .permissions import IsOwner
+# from .permissions import IsOwner
 from .utils import Util
 from .models import User
 from django.contrib.sites.shortcuts import get_current_site
