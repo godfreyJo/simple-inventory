@@ -1,5 +1,5 @@
 from django.db import models
-from helpers.models import TrackingModel
+# from helpers.models import TrackingModel
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.models import (PermissionsMixin, BaseUserManager, AbstractBaseUser)
 from rest_framework_simplejwt.tokens import RefreshToken
