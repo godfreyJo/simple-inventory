@@ -26,10 +26,7 @@ class ExpenseDetailAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = ExpenseSerializer
     permission_classes  = (permissions.IsAuthenticated, IsOwner,)
     queryset = Expense.objects.all()    
-    lookup_field ="id"
-
-    def perform_create(self, serializer):
-        return self.save(owner=self.request.user)
+    lookup_field ="id" 
 
     def get_queryset(self):
         return self.queryset.filter(owner=self.request.user)
