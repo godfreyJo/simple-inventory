@@ -13,10 +13,10 @@ from rest_framework import permissions
 class ExpenseListAPIView(ListCreateAPIView):
     serializer_class = ExpenseSerializer
     queryset = Expense.objects.all()
-    permissions = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
-        return self.save(owner=self.request.user)
+        return serializer.save(owner=self.request.user)
 
     def get_queryset(self):
         return self.queryset.filter(owner=self.request.user)
@@ -24,9 +24,9 @@ class ExpenseListAPIView(ListCreateAPIView):
 
 class ExpenseDetailAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = ExpenseSerializer
-    queryset = Expense.objects.all()
-    permissions = (permissions.IsAuthenticated, IsOwner,)
-    lookup_field="id"
+    permission_classes  = (permissions.IsAuthenticated, IsOwner,)
+    queryset = Expense.objects.all()    
+    lookup_field ="id"
 
     def perform_create(self, serializer):
         return self.save(owner=self.request.user)
